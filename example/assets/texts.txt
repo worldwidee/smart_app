@@ -1,0 +1,6 @@
+English,Turkish,German
+hello|=|Hello|,|Merhaba|,|Hallo
+lang|=|Language|,|Dil|,|Sprache
+darkMode|=|Dark Mode|,|Karanlık Mod|,|Dunkler Modus
+btnText|=|You have pushed the button this many times|,|Düğmeye bukadar çok bastın|,|Sie haben den Knopf so oft gedrückt
+appbar_title|=|Smart App Design|,|Akıllı Uygulama Tasarımı|,|Intelligentes App-Design

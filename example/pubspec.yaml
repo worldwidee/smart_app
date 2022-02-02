@@ -1,0 +1,28 @@
+name: smartapp
+description: A new Flutter project.
+
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.15.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  smart_app:
+  get: ^4.3.8
+  cupertino_icons: ^1.0.2
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^1.0.0
+dependency_overrides:
+  smart_app:
+    path: ..
+flutter:
+
+  uses-material-design: true
+  assets:
+    - assets/
