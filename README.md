@@ -231,14 +231,14 @@ Other Lines:Your text variable name|=|meaning1|,|meaning2|,|meaning3|,|meaning4
 Warning: Dont put empty line or space in beginning in your text file
 For example:
 - texts.txt file in Example/assets folder:
-``
+```dart
 English,Turkish,German
 hello|=|Hello|,|Merhaba|,|Hallo
 lang|=|Language|,|Dil|,|Sprache
 darkMode|=|Dark Mode|,|Karanlık Mod|,|Dunkler Modus
 btnText|=|You have pushed the button this many times|,|Düğmeye bukadar çok bastın|,|Sie haben den Knopf so oft gedrückt
 appbar_title|=|Smart App Design|,|Akıllı Uygulama Tasarımı|,|Intelligentes App-Design
-``
+```
 
 - After design your app texts file you are ready to set your words. You can set texts with defined function or while starting SmartAppPanel()
 
