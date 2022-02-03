@@ -9,9 +9,9 @@ Creating the application skeleton may be tough. The application which is inside 
 
 ## Features
 
-Page management is ready\n
-TextStyle is hard to write again again in Text widget.
-You will be able to access these features easily from anywhere in the application.
+Page management is ready  
+TextStyle is hard to write again again in Text widget.  
+You will be able to access these features easily from anywhere in the application.  
 - Page management
 - Responsive textstyle(Especially for desktop apps)
 - Dark/Light mode colors
