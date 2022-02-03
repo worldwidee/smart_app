@@ -1,7 +1,7 @@
 # smart_app
 
 Easy and simple way to design your application.
-
+Creating the application skeleton may be tough. The application which is inside example folder is ready to develope(Just edit some specific things). You don't have to deal with these following features
 <p align="center">
 <img src="https://github.com/worldwidee/files/raw/main/responsive.gif"> 
 <img src="https://github.com/worldwidee/files/raw/main/modechange.gif"> 
@@ -9,8 +9,10 @@ Easy and simple way to design your application.
 
 ## Features
 
-You will be able to access these features easily from anywhere in the application.
+Page management is ready
 TextStyle is hard to write again again in Text widget.
+You will be able to access these features easily from anywhere in the application.
+- Page management
 - Responsive textstyle(Especially for desktop apps)
 - Dark/Light mode colors
 - Internet connection checker
@@ -55,13 +57,12 @@ Then run `flutter packages get`
 There is a detailed example project in the `example` folder. You can directly run and play on it. There are code snippets from example project below.
 
 ## Basic Setup
-Start SmartAppPanel() in main function. 
+Start SmartAppPanel() in main function(without page management and language management). 
 
 ```dart
 late AppColors appColors;
 late AppFonts appFonts;
 late AppSettings appSettings;
-late AppTexts appTexts;
 late SmartAppPanel panel;
 void main() {
   panel = SmartAppPanel();
@@ -69,16 +70,17 @@ void main() {
   appFonts = panel.appFonts;
   appColors = panel.appColors;
   appSettings = panel.appSettings;
-  appTexts = panel.appTexts;
   runApp(MyApp());
 }
 ```
 Set listener for appSettings in every stateful widget. Because when you change some features, it needs setstate if you want show changes
+Warning: On desktop, you have to set listener also for appFonts otherwise the app dont become responsive design
 
 ```dart
   @override
   void initState() {
     appSettings.addListener(setStateHere);
+    /*if platform is desktop*/appFonts.addListener(setStateHere);
     super.initState();
   }
   void setStateHere() {
@@ -89,6 +91,7 @@ Set listener for appSettings in every stateful widget. Because when you change s
   @override
   void dispose() {
     appSettings.removeListener(setStateHere);
+    /*if platform is desktop*/appFonts.removeListener(setStateHere);
     super.dispose();
   }
 ```
@@ -127,6 +130,119 @@ in mobile=>
 ```
 Thats it! You can fetch your defined fonts or settings
 
+## Page Management(PageState part)
+- Define your PageState class as global
+```dart
+   late SmartAppPanel panel;
+```
+- Define your pages as Map<String, Widget>
+
+```dart
+   Map<String, Widget> pages = {
+    "page1": const Page1(),
+    "page2": const Page2(),
+    "settings": const Settings(),
+    "login": const LoginPage(),
+  };
+```
+- Create InitPages format variable and set its features
+
+```dart
+  InitPages initPages = InitPages();
+  initPages.pages = pages;
+  initPages.initPage = "page1";
+```
+
+- Enter this InitPages variable in SmartAppPanel().start function and set your PageState global variable
+
+```dart
+  panel = SmartAppPanel();
+  panel.start(
+      darkMode: true, initPages: initPages);
+  pageState = panel.pageState;
+```
+
+- if your app has user login/authentication also use this
+
+```dart
+  /*if user has logged*/appSettings.signIn();
+  /*or*/appSettings.signOut();
+```
+
+- Full view
+```dart
+late AppColors appColors;
+late AppFonts appFonts;
+late AppSettings appSettings;
+late AppTexts appTexts;
+late PageState pageState;
+late SmartAppPanel panel;
+void main() {
+  panel = SmartAppPanel();
+  Map<String, Widget> pages = {
+    "page1": const Page1(),
+    "page2": const Page2(),
+    "settings": const Settings(),
+    "login": const LoginPage(),
+  };
+  InitPages initPages = InitPages();
+  initPages.pages = pages;
+  initPages.initPage = "page1";
+  panel.start(
+      darkMode: true, textPath: "assets/texts.txt", initPages: initPages);
+  appFonts = panel.appFonts;
+  appColors = panel.appColors;
+  appSettings = panel.appSettings;
+  appTexts = panel.appTexts;
+  pageState = panel.pageState;
+  appSettings.signIn();
+  runApp(const MyApp());
+}
+```
+
+- Then simply you can use like below the example
+
+```dart
+  Scaffold(
+      backgroundColor: appColors.backGroundColor,
+      body: GetBuilder<PageState>(
+              builder: (controller) {
+                return controller.page;
+              },
+            ),
+    )
+```
+
+in cases where user can login
+Login page mostly doesn't have appbar or menu. Thats why below example designed like that
+```dart
+    return Scaffold(
+      backgroundColor: appColors.backGroundColor,
+      appBar: signIn ? MyAppbar() : null,
+      body: signIn
+          ? Row(
+              children: [
+                Expanded(
+                  child: LeftMenu(),
+                ),
+                Expanded(
+                  flex: 5,
+                  child: GetBuilder<PageState>(
+                    builder: (controller) {
+                      return controller.page;
+                    },
+                  ),
+                )
+              ],
+            )
+          : GetBuilder<PageState>(
+              builder: (controller) {
+                return controller.page;
+              },
+            ),
+    );
+```
+- 
 ## AppFonts part
 
 TextStyle parameters = color, isBold, fontWeight
@@ -147,14 +263,14 @@ But you dont need to define its parameters if its not special
        style: appFonts.L(),
     )
 ```
-- If you are working on Desktop/Web app also trying to get responsive textstyle, these textstyle sizes are calculated by multiplying the app width by some ratio
+- If you are working on Desktop/Web app also trying to get responsive textstyle, these textstyle sizes are calculated by multiplying the total app size(app width + app height) by some ratio
   Ratios : {
-    "xS": 0.007,
-    "S": 0.009,
-    "M": 0.012,
-    "L": 0.015,
-    "xL": 0.020,
-    "mega": 0.030
+    "xS": 0.005,
+    "S": 0.007,
+    "M": 0.009,
+    "L": 0.012,
+    "xL": 0.015,
+    "mega": 0.020
   }
   You can change these ratios with:
 ```dart
@@ -238,14 +354,37 @@ lang|=|Language|,|Dil|,|Sprache
 darkMode|=|Dark Mode|,|Karanlık Mod|,|Dunkler Modus
 btnText|=|You have pushed the button this many times|,|Düğmeye bukadar çok bastın|,|Sie haben den Knopf so oft gedrückt
 appbar_title|=|Smart App Design|,|Akıllı Uygulama Tasarımı|,|Intelligentes App-Design
+page|=|Page|,|Sayfa|,|Seite
+login|=|Login|,|Giriş|,|Anmeldung
+signIn|=|Sign In|,|Kayıt Olmak|,|Eintragen
+settings|=|Settings|,|Ayarlar|,|Einstellungen
+signout|=|Sign Out|,|Oturumu Kapat|,|Abmelden
 ```
 
 - After design your app texts file you are ready to set your words. You can set texts with defined function or while starting SmartAppPanel()
 
 ```dart
-   setTexts("assets/texts.txt");
+late AppColors appColors;
+late AppFonts appFonts;
+late AppSettings appSettings;
+late AppTexts appTexts;
+late SmartAppPanel panel;
+void main() {
+  panel = SmartAppPanel();
+  panel.start(
+      darkMode: true, textPath: "assets/texts.txt");
+  appFonts = panel.appFonts;
+  appColors = panel.appColors;
+  appSettings = panel.appSettings;
+  appTexts = panel.appTexts;
+  appSettings.signIn();
+  runApp(const MyApp());
+}
 ```
-
+or
+```dart
+   appTexts.setTexts("assets/texts.txt");
+```
 - Now you are ready to fetch texts wherever you are
 
 ```dart
