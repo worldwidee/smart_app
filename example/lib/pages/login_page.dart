@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:smartapp/main.dart';
+import '../texts/app_text.dart';
+import 'package:smart_app/smart_app.dart';
+import '/main.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -9,35 +11,27 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-
   @override
   void initState() {
-    appFonts.addListener(setStateHere);
+    appSettings.listenState(this);
     super.initState();
-  }
-
-  void setStateHere() {
-    if (mounted) {
-      setState(() {});
-    }
   }
 
   @override
   void dispose() {
-    appFonts.removeListener(setStateHere);
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    double iconW = appFonts.appWidth * 0.1;
+    double iconW = appFonts.appWidth * 0.3;
     double iconH = appFonts.appHeight * 0.07;
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            "${appTexts.getText("login")} ${appTexts.getText("page")}",
+            "${AppTexts.login} ${AppTexts.page}",
             style: appFonts.mega(),
           ),
           SizedBox(
@@ -45,30 +39,30 @@ class _LoginPageState extends State<LoginPage> {
           ),
           TextButton(
               onPressed: () {
-                appSettings.signIn();
-                pageState.changePage(page: "page1");
+                context.go(name: "page1");
               },
               child: Container(
                 width: iconW,
                 height: iconH,
                 decoration: BoxDecoration(
-                    color: appColors.secondColor,
+                    color: appColors.btnColor,
                     borderRadius: BorderRadius.circular(10)),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text(
-                      appTexts.getText("login"),
-                      style: appFonts.M(color: appColors.secondTextColor),
+                    Icon(
+                      Icons.login,
+                      size: appFonts.icon_L,
+                      color: appColors.btnTextColor,
                     ),
                     const SizedBox(
                       width: 5,
                     ),
-                    Icon(
-                      Icons.login,
-                      size: appFonts.iconSize,
-                      color: appColors.secondTextColor,
-                    )
+                    Text(
+                      AppTexts.login,
+                      style: appFonts.M(color: appColors.btnTextColor),
+                    ),
                   ],
                 ),
               ))

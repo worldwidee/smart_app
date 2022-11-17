@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:smart_app/smart_app.dart';
 
 import '../../main.dart';
+import '../../texts/app_text.dart';
 
 class MyAppbar extends StatelessWidget with PreferredSizeWidget {
   const MyAppbar({Key? key}) : super(key: key);
@@ -14,19 +15,19 @@ class MyAppbar extends StatelessWidget with PreferredSizeWidget {
         title: Row(
           children: [
             Icon(Icons.label_important,
-                color: appColors.secondTextColor, size: appFonts.iconSize),
-            Text(appTexts.getText("appbar_title"),
-                style: appFonts.L(color: appColors.secondTextColor))
+                color: appColors.appBarIconColor, size: appFonts.iconSize),
+            Text(AppTexts.appbar_title,
+                style: appFonts.M(color: appColors.appBarTextColor))
           ],
         ),
-        backgroundColor: appColors.secondColor,
+        backgroundColor: appColors.appBarBackgroundColor,
         actions: [
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
                 "Internet",
-                style: appFonts.L(color: appColors.secondTextColor),
+                style: appFonts.M(color: appColors.appBarTextColor),
               ),
               const SizedBox(
                 width: 10,
@@ -50,5 +51,5 @@ class MyAppbar extends StatelessWidget with PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(appFonts.appHeight * 0.07);
+  Size get preferredSize => Size.fromHeight(kToolbarHeight);
 }

@@ -1,52 +1,66 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smart_app/smart_app.dart';
-import 'package:smartapp/main.dart';
+import '../../texts/app_text.dart';
+import '/main.dart';
 
 class LeftMenu extends StatelessWidget {
   LeftMenu({Key? key}) : super(key: key);
-  List<String> pageNames = ["page", "page", "settings", "signout"];
-  List<String> pageRoutes = ["page1", "page2", "settings", "login"];
+  late List<String> pageNames;
+  List<String> pageRoutes = ["page1", "page2", "settings", "widgets", "login"];
   List<Widget> pageIcons = [
     Icon(Icons.last_page,
-        size: appFonts.iconSize, color: appColors.secondTextColor),
+        size: appFonts.iconSize, color: appColors.secondaryIconColor),
     Icon(Icons.last_page,
-        size: appFonts.iconSize, color: appColors.secondTextColor),
+        size: appFonts.iconSize, color: appColors.secondaryIconColor),
     Icon(Icons.settings,
-        size: appFonts.iconSize, color: appColors.secondTextColor),
+        size: appFonts.iconSize, color: appColors.secondaryIconColor),
+    Icon(Icons.widgets,
+        size: appFonts.iconSize, color: appColors.secondaryIconColor),
     Icon(Icons.logout_outlined,
-        size: appFonts.iconSize, color: appColors.secondTextColor)
+        size: appFonts.iconSize, color: appColors.secondaryIconColor)
   ];
   @override
   Widget build(BuildContext context) {
+    pageNames = [
+      AppTexts.page,
+      AppTexts.page,
+      AppTexts.settings,
+      AppTexts.widgets,
+      AppTexts.signout
+    ];
     return Container(
-      color: appColors.secondColor,
+      color: appColors.secondaryBackgroundColor,
       child: GetBuilder<PageState>(builder: (controller) {
         return GetBuilder<AppSettings>(builder: (settingsController) {
-          return Column(
+          return ListView(
             children: [
               for (int i = 0; i < pageNames.length; i++)
-                Expanded(
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 20),
                   child: TextButton(
                     onPressed: () {
                       String route = pageRoutes[i];
-                      if (route == "login") {
-                        appSettings.signOut();
-                      }
-                      pageState.changePage(page: route);
+                      SmartAppPanel.pageState.go(name: route);
                     },
-                    child: ListTile(
-                      leading: pageIcons[i],
-                      title: Text(
-                        appTexts.getText(pageNames[i])+" ${i<2?(i+1):""}",
-                        style: appFonts.M(color: appColors.secondTextColor),
-                      ),
+                    child: Row(
+                      children: [
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        pageIcons[i],
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          pageNames[i] + " ${i < 2 ? (i + 1) : ""}",
+                          style:
+                              appFonts.S(color: appColors.secondaryTextColor),
+                        )
+                      ],
                     ),
                   ),
                 ),
-              const Spacer(
-                flex: 5,
-              )
             ],
           );
         });

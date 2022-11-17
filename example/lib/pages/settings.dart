@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:smart_app/smart_app.dart';
 
 import '../main.dart';
+import '../texts/app_text.dart';
 
 class Settings extends StatefulWidget {
   const Settings({Key? key}) : super(key: key);
@@ -11,81 +13,72 @@ class Settings extends StatefulWidget {
 }
 
 class _SettingsState extends State<Settings> {
+  late bool darkMode;
   @override
   void initState() {
-    appSettings.addListener(setStateHere);
-    appFonts.addListener(setStateHere);
+    darkMode = appColors.name == "dark";
+    appSettings.listenState(this);
     super.initState();
   }
 
-  void setStateHere() {
-    if (mounted) {
-      setState(() {});
-    }
-  }
-
+  List<String> languages = ["English", "Turkish"];
   @override
   void dispose() {
-    appFonts.removeListener(setStateHere);
-    appSettings.removeListener(setStateHere);
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    darkMode = appColors.name == "dark";
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Text(
-            appTexts.getText("hello"),
+            AppTexts.hello,
             style: appFonts.L(),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                appTexts.getText("lang") + " : ",
+                AppTexts.lang + " : ",
                 style: appFonts.M(),
               ),
               const SizedBox(
                 width: 10,
               ),
-              DropdownButton<String>(
-                dropdownColor: appColors.secondColor,
-                value: appSettings.language,
-                items:
-                    List<String>.from(appTexts.languages).map((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(
-                      value,
-                      style: appFonts.M(),
-                    ),
-                  );
-                }).toList(),
-                onChanged: (language) {
-                  appSettings.changeLanguage = language!;
+              DropDown(
+                itemsData: AppTexts.languages
+                    .map((e) => DropDownItem(item: e, value: e))
+                    .toList(),
+                width: 100,
+                onChange: (value) {
+                  appSettings.changeLanguage =
+                      languages[AppTexts.languages.indexOf(value)];
                 },
-              )
+                radius: 30,
+                hoverColor: Colors.green,
+                color: appColors.btnColor,
+              ),
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                appTexts.getText("darkMode"),
+                AppTexts.darkMode,
                 style: appFonts.M(),
               ),
               CupertinoSwitch(
-                  value: appSettings.darkMode,
+                  value: darkMode,
                   onChanged: (mode) {
-                    appSettings.changeDarkMode = mode;
+                    appColors.changeAppearance(darkMode ? "light" : "dark");
                   })
             ],
           ),
           Text(
-            appTexts.getText("btnText"),
+            AppTexts.btnText,
             style: appFonts.M(),
           ),
         ],

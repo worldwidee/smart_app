@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../main.dart';
+import '../texts/app_text.dart';
 
 class Page2 extends StatefulWidget {
   const Page2({Key? key}) : super(key: key);
@@ -12,21 +13,12 @@ class Page2 extends StatefulWidget {
 class _Page2State extends State<Page2> {
   @override
   void initState() {
-    appSettings.addListener(setStateHere);
-    appFonts.addListener(setStateHere);
+    appSettings.listenState(this);
     super.initState();
-  }
-
-  void setStateHere() {
-    if (mounted) {
-      setState(() {});
-    }
   }
 
   @override
   void dispose() {
-    appFonts.removeListener(setStateHere);
-    appSettings.removeListener(setStateHere);
     super.dispose();
   }
 
@@ -34,7 +26,7 @@ class _Page2State extends State<Page2> {
   Widget build(BuildContext context) {
     return Center(
       child: Text(
-        "${appTexts.getText("page")} 2",
+        "${AppTexts.page} 2",
         style: appFonts.mega(),
       ),
     );

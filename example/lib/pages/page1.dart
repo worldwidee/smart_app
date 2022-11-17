@@ -1,5 +1,11 @@
+import 'dart:async';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
-import 'package:smartapp/main.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:smart_app/smart_app.dart';
+import '../texts/app_text.dart';
+import '/main.dart';
 
 class Page1 extends StatefulWidget {
   const Page1({Key? key}) : super(key: key);
@@ -11,29 +17,20 @@ class Page1 extends StatefulWidget {
 class _Page1State extends State<Page1> {
   @override
   void initState() {
-    appSettings.addListener(setStateHere);
-    appFonts.addListener(setStateHere);
+    SmartAppPanel.appSettings.listenState(this);
     super.initState();
-  }
-
-  void setStateHere() {
-    if (mounted) {
-      setState(() {});
-    }
   }
 
   @override
   void dispose() {
-    appFonts.removeListener(setStateHere);
-    appSettings.removeListener(setStateHere);
     super.dispose();
   }
-
+  
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Text(
-        "${appTexts.getText("page")} 1",
+        "${AppTexts.page} 1",
         style: appFonts.mega(),
       ),
     );

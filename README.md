@@ -1,11 +1,13 @@
 # smart_app
 
-Easy and simple way to design your application.
-Creating the application skeleton may be tough. The application which is inside example folder is ready to develope(Just edit some specific things). You don't have to deal with these following features
 <p align="center">
 <img src="https://github.com/worldwidee/files/raw/main/responsive.gif"> 
 <img src="https://github.com/worldwidee/files/raw/main/modechange.gif"> 
 </p>
+
+Easy and simple way to design your application.
+Creating the application skeleton may be tough. You can use this skeleton we prepared for you after you complete the simple steps ahead. Develop applications for mobile and desktop platforms at the same time. We also prepared a lot of widgets to make your job easier.
+Note: The application which is inside example folder is ready to develop(Just edit some specific things). You don't have to deal with these following features
 
 ## Features
 
@@ -13,8 +15,8 @@ Page management is ready
 TextStyle is hard to write again again in Text widget.  
 You will be able to access these features easily from anywhere in the application.  
 - Page management
-- Responsive textstyle(Especially for desktop apps)
-- Dark/Light mode colors
+- Responsive textstyle(Mobile)
+- Manage appearances of your application
 - Internet connection checker
 - Spesific settings 
 - Language supported words/sentences
@@ -22,23 +24,43 @@ You will be able to access these features easily from anywhere in the applicatio
 - Also you can define spesific textstyle, icon size, word/sentence, color
 - Customizable Features
 - All specified specifications may change(specified textstyles,iconsize,colors..)
-- App size, width, height
+- Reach App size, width, height and the other variables from everywhere
 
 
 Defined TextStyle types:
 - xS, S, M, L, xL, mega
 
-Defined App Colors:
+Appearance contains these variables:
 - Background Color
 - Text Color
-- Second Background Color
-- Second Text Color
+- Hint Color
+- Button Color
+- Button Text Color
+- Secondary Background Color
+- Secondary Text Color
+- Secondary Hint Color
+- Secondary Button Color
+- Secondary Button Text Color
+- AppBar Background Color
+- AppBar Text Color
+- AppBar Hint Color
+- AppBar Button Color
+- AppBar Button Text Color
+- Drawer Background Color
+- Drawer Text Color
+- Drawer Hint Color
+- Drawer Button Color
+- Drawer Button Text Color
+- Dialog Background Color
+- Dialog Text Color
+- Dialog Hint Color
+- Dialog Button Color
+- Dialog Button Text Color
 
 Defined Settings
 
-- App Language
-- Internet Connection Checker
-- Dark Mode
+- Languages
+- Device Type(Desktop-Mobile)
 - Definable function which is working after changing internet connection status
 
 
@@ -57,159 +79,87 @@ Then run `flutter packages get`
 There is a detailed example project in the `example` folder. You can directly run and play on it. There are code snippets from example project below.
 
 ## Basic Setup
-Start SmartAppPanel() in main function(without page management and language management). 
+Run SmartAppPanel.setup() in main function. 
 
 ```dart
-late AppColors appColors;
-late AppFonts appFonts;
-late AppSettings appSettings;
-late SmartAppPanel panel;
 void main() {
-  panel = SmartAppPanel();
-  panel.start();
-  appFonts = panel.appFonts;
-  appColors = panel.appColors;
-  appSettings = panel.appSettings;
-  runApp(MyApp());
+  SmartAppPanel.setup(
+      pages: appPages, languages: languages, appearances: appearances);
 }
 ```
-Set listener for appSettings in every stateful widget. Because when you change some features, it needs setstate if you want show changes
-Warning: On desktop, you have to set listener also for appFonts otherwise the app dont become responsive design
+Set listener for AppSettings in every stateful widget. Because when you change some features, it needs setstate if you want to show changes
 
 ```dart
   @override
   void initState() {
-    appSettings.addListener(setStateHere);
-    /*if platform is desktop*/appFonts.addListener(setStateHere);
+    SmartAppPanel.appSettings.listenState(this);
     super.initState();
-  }
-  void setStateHere() {
-    if (mounted) {
-      setState(() {});
-    }
-  }
-  @override
-  void dispose() {
-    appSettings.removeListener(setStateHere);
-    /*if platform is desktop*/appFonts.removeListener(setStateHere);
-    super.dispose();
   }
 ```
 
-Set application sizes 
-in desktop/web=>
+Set application sizes in your page control panel(the dynamic place where you view your pages)
+Note: We suggest you to set staticSize as true on Desktop and opposite on Mobile
 
 ```dart
-  //Turn false if you want static textstyle fonts
-  bool isResposible = true;
+  //Turn false if you want dynamic textstyle fonts or icon size
+  bool setSizesAsStatic = true;
   @override
   Widget build(BuildContext context) {
-      appFonts.changeSizes(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
-          isResposible: isResposible);
+    SmartAppPanel.appFonts.init(context,staticSize: setSizesAsStatic);
     
   return Scaffold();
   }
 ```
-in mobile=>
-```dart
-  bool started = false;
-  bool isResposible = false;
-  @override
-  Widget build(BuildContext context) {
-    if (!started) {
-      appFonts.changeSizes(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
-          isResposible: isResposible);
-      started = true;
-    }
-  return Scaffold();
-  }
-```
-Thats it! You can fetch your defined fonts or settings
+Thats it! You can fetch your defined fonts or settings from everywhere!
 
-## Page Management(PageState part)
-- Define your PageState class as global
-```dart
-   late SmartAppPanel panel;
-```
-- Define your pages as Map<String, Widget>
+## PageState(Page Management)
+- Define your pages
 
 ```dart
-   Map<String, Widget> pages = {
+  AppPages appPages = AppPages(pages: {
     "page1": const Page1(),
     "page2": const Page2(),
     "settings": const Settings(),
     "login": const LoginPage(),
-  };
+  }, initPage: "page1");
 ```
-- Create InitPages format variable and set its features
+- And put that inside setup function or set for PageState
 
 ```dart
-  InitPages initPages = InitPages();
-  initPages.pages = pages;
-  initPages.initPage = "page1";
+  SmartAppPanel.setup(pages: appPages);
 ```
-
-- Enter this InitPages variable in SmartAppPanel().start function and set your PageState global variable
-
 ```dart
-  panel = SmartAppPanel();
-  panel.start(
-      darkMode: true, initPages: initPages);
-  pageState = panel.pageState;
-```
-
-- if your app has user login/authentication also use this
-
-```dart
-  /*if user has logged*/appSettings.signIn();
-  /*or*/appSettings.signOut();
+  SmartAppPanel.setAppPages(appPages);
 ```
 
 - Full view
 ```dart
-late AppColors appColors;
-late AppFonts appFonts;
-late AppSettings appSettings;
-late AppTexts appTexts;
-late PageState pageState;
-late SmartAppPanel panel;
-void main() {
-  panel = SmartAppPanel();
-  Map<String, Widget> pages = {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  AppPages appPages = AppPages(pages: {
     "page1": const Page1(),
     "page2": const Page2(),
     "settings": const Settings(),
     "login": const LoginPage(),
-  };
-  InitPages initPages = InitPages();
-  initPages.pages = pages;
-  initPages.initPage = "page1";
-  panel.start(
-      darkMode: true, textPath: "assets/texts.txt", initPages: initPages);
-  appFonts = panel.appFonts;
-  appColors = panel.appColors;
-  appSettings = panel.appSettings;
-  appTexts = panel.appTexts;
-  pageState = panel.pageState;
-  appSettings.signIn();
+  }, initPage: "page1");
+  AppLanguages languages =
+      AppLanguages(languages: ["English,Turkish"], initLanguge: "English");
+  AppAppearances appearances = AppAppearances(appearances: [
+    Appearance.dark(),
+    Appearance.light(),
+  ], initAppearance: Appearance.dark());
+  SmartAppPanel.setup(
+      pages: appPages, languages: languages, appearances: appearances);
   runApp(const MyApp());
 }
 ```
 
-- Then simply you can use like below the example
+- SmartPage() is your dynamic page widget.Use this widget in the dynamic place where you want to display your pages.Then simply you can use like below the example
 
 ```dart
   Scaffold(
-      backgroundColor: appColors.backGroundColor,
-      body: GetBuilder<PageState>(
-              builder: (controller) {
-                return controller.page;
-              },
-            ),
+      backgroundColor: SmartAppPanel.appColors.backGroundColor,
+      body: SmartPage(),
     )
 ```
 
@@ -217,7 +167,7 @@ in cases where user can login
 Login page mostly doesn't have appbar or menu. Thats why below example designed like that
 ```dart
     return Scaffold(
-      backgroundColor: appColors.backGroundColor,
+      backgroundColor: SmartAppPanel.appColors.backGroundColor,
       appBar: signIn ? MyAppbar() : null,
       body: signIn
           ? Row(
@@ -227,56 +177,78 @@ Login page mostly doesn't have appbar or menu. Thats why below example designed 
                 ),
                 Expanded(
                   flex: 5,
-                  child: GetBuilder<PageState>(
-                    builder: (controller) {
-                      return controller.page;
-                    },
-                  ),
+                  child: SmartPage(),
                 )
               ],
             )
-          : GetBuilder<PageState>(
-              builder: (controller) {
-                return controller.page;
-              },
-            ),
+          : SmartPage(),
     );
 ```
-- 
+
+### Change Page
+You have two ways to change the current page
+
+-via BuildContext:
+```dart
+   context.go(name: pageName); //Provide the defined name of the target page
+```
+
+-via PageState:
+```dart
+   SmartAppPanel.pageState.go(name: pageName); //Provide the defined name of the target page
+```
+
 ## AppFonts part
 
-TextStyle parameters = color, isBold, fontWeight
-But you dont need to define its parameters if its not special
+### Set Application Sizes
+Set application sizes in your page control panel(the dynamic place where you view your pages)
+Note: We suggest you to set staticSize as true on Desktop and opposite on Mobile
+
+```dart
+  //Turn false if you want dynamic textstyle fonts or icon size
+  bool setSizesAsStatic = true;
+  @override
+  Widget build(BuildContext context) {
+    SmartAppPanel.appFonts.init(context,staticSize: setSizesAsStatic);
+    
+  return Scaffold();
+  }
+```
+
+TextStyle parameters = color, isBold, fontWeight, isStatic
+But you dont need to define its parameters
 ```dart
     Text(
       "Hello",
-      style: appFonts.L(
+      style: SmartAppPanel.appFonts.L(
       isBold: true,
-      color: appColors.textColor,
+      color: SmartAppPanel.appColors.textColor,
       fontWeight: FontWeight.normal),
         ),
 ```
+Specifically, you may need static/dynamic textstyle
 - Fetching TextStyle
 ```dart
     Text(
        "Hello",
-       style: appFonts.L(),
+       style: SmartAppPanel.appFonts.L(isStatic: true),
     )
 ```
-- If you are working on Desktop/Web app also trying to get responsive textstyle, these textstyle sizes are calculated by multiplying the total app size(app width + app height) by some ratio
+- If you are working with responsive textstyle, these textstyle sizes are calculated by multiplying the total app size(app width + app height) by some ratio
   Ratios : {
-    "xS": 0.005,
-    "S": 0.007,
-    "M": 0.009,
-    "L": 0.012,
-    "xL": 0.015,
-    "mega": 0.020
+    "xS": 0.009,
+    "S": 0.012,
+    "M": 0.015,
+    "L": 0.020,
+    "xL": 0.025,
+    "mega": 0.030,
+    "giga": 0.040
   }
   You can change these ratios with:
 ```dart
-   appFonts.changeStaticSizeRatio(name:"L", ratio:0.012);
+   SmartAppPanel.appFonts.changeStaticSizeRatio(name:"L", ratio:0.012);
 ```
-- If you want to work on mobile app or any app which is using static text size, static textstyle sizes like:
+- If you are working with static textstyle, static textstyle sizes like:
   Sizes : {
     "xS": 8,
     "S": 12,
@@ -287,20 +259,76 @@ But you dont need to define its parameters if its not special
   }
   You can change these sizes with:
 ```dart
-   appFonts.changeStaticSize(name:"L", size:20);
+   SmartAppPanel.appFonts.changeStaticSize(name:"L", size:20);
 ```
 
 - Fetching app sizes
 ```dart
-    double app_width=appFonts.appWidth;
-    double app_height=appFonts.appHeight;
-    double app_totalSize=appFonts.totalSize;
+    double app_width=SmartAppPanel.appFonts.appWidth;
+    double app_height=SmartAppPanel.appFonts.appHeight;
+    double app_totalSize=SmartAppPanel.appFonts.totalSize;
 ```
 ## AppColors
 
+AppColors contains the color types of your application. You need to set your application's appearances to use that. 
+
+### Set Appearances
+
+-Define your appearances
+
+```dart
+  AppAppearances appearances = AppAppearances(appearances: [
+    Appearance.dark(),
+    Appearance.light(),
+  ], initAppearance: Appearance.dark());
+```
+
+- And put that inside setup function or set your app's appearances through setAppAppearances function inside SmartAppPanel
+
+```dart
+  SmartAppPanel.setup(appearances: appearances);
+```
+```dart
+  SmartAppPanel.setAppAppearances(appearances);
+```
+
+
+### Variables of Appearance Class
+
+- backgroundColor
+- textColor
+- hintColor
+- btnColor
+- btnTextColor
+- iconColor
+- secondaryBackgroundColor
+- secondaryTextColor
+- secondaryHintColor
+- secondaryBtnColor
+- secondaryBtnTextColor
+- secondaryIconColor
+- appBarBackgroundColor
+- appBarTextColor
+- appBarHintColor
+- appBarBtnColor
+- appBarBtnTextColor
+- appBarIconColor
+- drawerBackgroundColor
+- drawerTextColor
+- drawerHintColor
+- drawerBtnColor
+- drawerBtnTextColor
+- drawerIconColor
+- dialogBackgroundColor
+- dialogTextColor
+- dialogHintColor
+- dialogBtnColor
+- dialogBtnTextColor
+- dialogIconColor
+
 Application designs mostly need two common color for background fill. For example when you got left menu, second background color is waiting to fill it. 
 
-- Imagine we got left menu design and page design which is designed with expanded widgets. You can design like that:
+- Imagine you got left menu and design like that:
 
 ```dart
 Row(
@@ -309,7 +337,7 @@ Row(
           child: Container(
             width: double.infinity,
             height: double.infinity,
-            color: appColors.secondColor,
+            color: SmartAppPanel.appColors.secondaryBackgroundColor,
           ),
         ),
         Expanded(
@@ -317,112 +345,191 @@ Row(
           child: Container(
             width: double.infinity,
             height: double.infinity,
-            color: appColors.backGroundColor,
+            color: SmartAppPanel.appColors.backgroundColor,
           ),
         )
       ],
     )
 ```
-- Then we also need two text color too. These names are textColor, secondTextColor
+- Then we also need two text color too. These names are textColor, secondaryTextColor
 
 ## AppSettings
 
-AppSettings is the control mechanism of everything.
+AppSettings is the control mechanism of your app. When something updated in AppColors and AppFonts, this also trigger to AppSettings. Which means you dont need to listen the other statements.
 
--You can set init app language, dark mode, function which is working after changing internet status while starting SmartAppPanel() or with defined functions.
+AppSettings contains:
+- Languages
+- Device Type(Desktop-Mobile)
+- Definable function which is working after changing internet connection status
+
+### Languages
+-You need to set languages of your app to use "App Language" option and put it inside setup function
+
 ```dart
-   appSettings.changeLanguage="English";
-   appSettings.changeDarkMode=true;
-   appSettings.afterConnectionFunc = (connection) {
-      print("Current Conneciton:$connection");
-    };
+  AppLanguages languages =
+      AppLanguages(languages: ["English,Turkish"], initLanguge: "English");
+  SmartAppPanel.setup(languages: languages);
 ```
 
-## AppTexts
+### Device Type(Desktop-Mobile)
+-Make sure you have called AppFonts.init() function before using this feature
+-You'll be able to reach these bool variables:
+- isMobile:
+You can check if the user is connected by phone
+- isDesktop:
+You can check if the user is connected with the desktop
+- isWeb:
+You can check if the user is connected via the web
+- landScape:
+You can check if the user is holding the phone sideways
+- mobileMode:
+You can check if the user has downsized the desktop app to the size of the mobile app
+- largeMode:
+You can check if the user is using the desktop application in high sizes
+- midMode:
+You can check if the user is using the desktop application in sizes that between Mobile Mode and Large Mode
+- anyMobile:
+If you are developing crossplatform application and want check if it is in mobile sizes, you can use this
+
+```dart
+  bool isMobile=SmartAppPanel.appSettings.isMobile;
+  bool isDesktop=SmartAppPanel.appSettings.isDesktop;
+  bool isDesktop=SmartAppPanel.appSettings.isWeb;
+  bool landScape=SmartAppPanel.appSettings.landScape;
+  bool mobileMode=SmartAppPanel.appSettings.mobileMode;
+  bool largeMode=SmartAppPanel.appSettings.largeMode;
+  bool midMode=SmartAppPanel.appSettings.midMode;
+  bool anyMobile=SmartAppPanel.appSettings.anyMobile;
+```
+
+### Internet Connection Checker
+
+-Set your function which is working after changing internet connection status:
+```dart
+  SmartAppPanel.appSettings.onConnectionChange=(status) {
+    print("Connection status has changed");
+  };
+```
+
+-Get connection status:
+```dart
+  bool connected=SmartAppPanel.appSettings.connected!;
+```
+
+## SmartText
 
 When you are developing multi language application it can be hard to manage it. But with this way its so simple.
-You need a txt file and fill with your app texts. File should design like that:
-First Line:Languages
-Other Lines:Your text variable name|=|meaning1|,|meaning2|,|meaning3|,|meaning4
-Warning: Dont put empty line or space in beginning in your text file
-For example:
-- texts.txt file in Example/assets folder:
+- Make sure to set the languages of your app
+- Use SmartText for variable of type String, SmartList for variable of type List<String>
+- 
+### Use SmartText inside your Text() widget
+
 ```dart
-English,Turkish,German
-hello|=|Hello|,|Merhaba|,|Hallo
-lang|=|Language|,|Dil|,|Sprache
-darkMode|=|Dark Mode|,|Karanlık Mod|,|Dunkler Modus
-btnText|=|You have pushed the button this many times|,|Düğmeye bukadar çok bastın|,|Sie haben den Knopf so oft gedrückt
-appbar_title|=|Smart App Design|,|Akıllı Uygulama Tasarımı|,|Intelligentes App-Design
-page|=|Page|,|Sayfa|,|Seite
-login|=|Login|,|Giriş|,|Anmeldung
-signIn|=|Sign In|,|Kayıt Olmak|,|Eintragen
-settings|=|Settings|,|Ayarlar|,|Einstellungen
-signout|=|Sign Out|,|Oturumu Kapat|,|Abmelden
+Text(
+  SmartText(["Page", "Sayfa"]).text,
+  style: appFonts.giga(),
+)
 ```
-
-- After design your app texts file you are ready to set your words. You can set texts with defined function or while starting SmartAppPanel()
+### Design your word class that includes your common words like this way:
 
 ```dart
-late AppColors appColors;
-late AppFonts appFonts;
-late AppSettings appSettings;
-late AppTexts appTexts;
-late SmartAppPanel panel;
-void main() {
-  panel = SmartAppPanel();
-  panel.start(
-      darkMode: true, textPath: "assets/texts.txt");
-  appFonts = panel.appFonts;
-  appColors = panel.appColors;
-  appSettings = panel.appSettings;
-  appTexts = panel.appTexts;
-  appSettings.signIn();
-  runApp(const MyApp());
+class AppTexts {
+  static String get ok => SmartText(["ok", "tamam"]).text;
+  static String get hello => SmartText(["Hello", "Merhaba"]).text;
+  static String get lang => SmartText(["Language", "Dil"]).text;
+  static String get page => SmartText(["Page", "Sayfa"]).text;
+  static String get login => SmartText(["Login", "Giriş"]).text;
+  static String get appbar_title =>
+      SmartText(["Smart App Design", "Akıllı Uygulama Tasarımı"]).text;
+  static String get settings => SmartText(["Settings", "Ayarlar"]).text;
+  static String get signout => SmartText(["Signout", "Çıkış"]).text;
+  static String get darkMode => SmartText(["Dark Mode", "Karanlık Mod"]).text;
+  static String get btnText => SmartText([
+        "You have pushed the button this many times",
+        "Düğmeye bukadar çok bastın",
+      ]).text;
+  static List<String> get languages => SmartList([
+        ["English", "Turkish"],
+        ["İngilizce", "Türkçe"]
+      ]).text;
+  static List<String> get menus => SmartList([
+        ["Page 1", "Page 2", "Settings", "Signout"],
+        ["Sayfa 1", "Sayfa 2", "Ayarlar", "Çıkış"]
+      ]).text;
 }
 ```
-or
-```dart
-   appTexts.setTexts("assets/texts.txt");
-```
-- Now you are ready to fetch texts wherever you are
+
+And use it:
 
 ```dart
-   Text(
-        appTexts.getText("hello"),
-        style: appFonts.L(),
-        )
+Text(
+  AppTexts.hello,
+  style: appFonts.giga(),
+)
 ```
+
 ## Customizable Features
 
-- Custom AppColor
-```dart
-   ColorItem color=ColorItem(darkColor:Colors.black,lightColor:Colors.white);
-   String name="bgColor";
-   appColors.addSpecificColor(name:name,color:color);
-   // Then get your specific color
-   Color color=appColors.specific("bgColor");
-```
 - Custom AppFonts
 ```dart
    double size=20;
    String name="middle";
-   appFonts.addSpecificSize(name:name,size:size);
+   SmartAppPanel.appFonts.addSpecificSize(name:name,size:size);
    // Then get your specific textstyle and size
-   double size=appFonts.specificSize("middle");
-   TextStyle specific=appFonts.specific(specificType:"middle");
+   double size=SmartAppPanel.appFonts.specificSize("middle");
+   TextStyle specific=SmartAppPanel.appFonts.specific(specificType:"middle");
 ```
 - Custom AppSettings
 ```dart
     bool variable = false;
-    appSettings.addSpecificVariable(variable: variable, name: "leftMenuOpened");
-    appSettings.addSpecificSetting(
+    SmartAppPanel.appSettings.addSpecificVariable(variable: variable, name: "leftMenuOpened");
+    SmartAppPanel.appSettings.addSpecificSetting(
         function: () {
-          appSettings.specificVariables["leftMenuOpened"] =
-              !appSettings.specificVariables["leftMenuOpened"];
+          SmartAppPanel.appSettings.specificVariables["leftMenuOpened"] =
+              !SmartAppPanel.appSettings.specificVariables["leftMenuOpened"];
         },
         name: "changeLeftMenuStatus");
 ```
+
+## Widgets, Functions, Extensions
+
+|      Widgets      |     Functions     |           Extensions         |
+| -------------     |:-----------------:|:----------------------------:|
+| CheckBox          | cropImage         | inCaps(String)               |
+| CheckBoxList      | smartDialog       | allInCaps(String)            |
+| ChildExpanded     |                   | allInCaps(String)            |
+| CropImage         |                   | capitalizeFirstofEach(String)|
+| DownloadButton    |                   | capitalize()(String)         |
+| DropDown          |                   | go()(BuildContext)           |
+| ExpandedContainer |                   |                              |
+| ExpandedLine      |                   |                              |
+| ExpandedText      |                   |                              |
+| ExpandedWidget    |                   |                              |
+| ExpandedButton    |                   |                              |
+| FileIcon          |                   |                              |
+| FileType          |                   |                              |
+| GlassMorphism     |                   |                              |
+| IconOfFile        |                   |                              |
+| ImageAvatar       |                   |                              |
+| InfContainer      |                   |                              |
+| InfiniteText      |                   |                              |
+| LineChart         |                   |                              |
+| LiquidLoadingBar  |                   |                              |
+| MiddleOfExpanded  |                   |                              |
+| OnHover           |                   |                              |
+| PasswordField     |                   |                              |
+| ProfileAvatar     |                   |                              |
+| RadioButtonList   |                   |                              |
+| RegionBar         |                   |                              |
+| SizedButton       |                   |                              |
+| SmartTextField    |                   |                              |
+| SmartTextFieldFull|                   |                              |
+| ChatTextField     |                   |                              |
+| ExpandedTextButton|                   |                              |
+| SmartPlayer       |                   |                              |
+| VideoPlayerMobile |                   |                              |
+| VideoPlayerDesktop|                   |                              |
+
 ## Contributions
 * If you **found a bug**, open an issue.
 * If you **have a feature request**, open an issue.
