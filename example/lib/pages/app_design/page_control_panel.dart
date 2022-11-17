@@ -45,7 +45,7 @@ class _PageControlPanelState extends State<PageControlPanel> {
             if (!appSettings.anyMobile)
               SizedBox(
                 height: double.infinity,
-                width: appSettings.anyMobile ? appFonts.appWidth * 0.35 : 200,
+                width: 200,
                 child: LeftMenu(),
               ),
             Expanded(

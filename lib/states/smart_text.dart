@@ -13,7 +13,7 @@ class SmartText {
 class SmartList {
   List<List<String>> meanings = [];
   SmartList(this.meanings);
-  List<String> get text {
+  List<String> get texts {
     return meanings[Get.find<AppSettings>().getIndexOfLang()];
   }
 }

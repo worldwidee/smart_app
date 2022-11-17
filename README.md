@@ -2,33 +2,31 @@
 
 <p align="center">
 <img src="https://github.com/worldwidee/files/raw/main/responsive.gif"> 
-<img src="https://github.com/worldwidee/files/raw/main/modechange.gif"> 
+<img src="https://raw.githubusercontent.com/worldwidee/files/main/settings.gif"> 
 </p>
 
 Easy and simple way to design your application.
-Creating the application skeleton may be tough. You can use this skeleton we prepared for you after you complete the simple steps ahead. Develop applications for mobile and desktop platforms at the same time. We also prepared a lot of widgets to make your job easier.
-Note: The application which is inside example folder is ready to develop(Just edit some specific things). You don't have to deal with these following features
+Creating the application skeleton could be tough. You can use this skeleton we prepared for you, after you complete the simple steps below. Work on a single project to create your multi-platform app instead of separating your project for any specific platform. We have also prepared a lot of widgets to make your job easier.
+Note: The application which was located inside example folder is ready to utilize. Just do your own fine tuning and go ahead start building your own, project with given features below.
 
 ## Features
 
-Page management is ready  
-TextStyle is hard to write again again in Text widget.  
+Page management is ready to use.
+Writing textstyle  again and again could become a boring task, you will have an access to your own textstyle.  
 You will be able to access these features easily from anywhere in the application.  
 - Page management
-- Responsive textstyle(Mobile)
+- Responsive textstyle(for mobile)
 - Manage appearances of your application
-- Internet connection checker
-- Spesific settings 
-- Language supported words/sentences
+- Adjustable custom settings 
+- Language supported text and list of text
 - Icon size
+- Run your own function on change of internet connection status
 - Also you can define spesific textstyle, icon size, word/sentence, color
-- Customizable Features
-- All specified specifications may change(specified textstyles,iconsize,colors..)
-- Reach App size, width, height and the other variables from everywhere
+- All given features are customizable to your own liking(textstyles,iconsize,colors..)
+- Reach App size, width, height and the other variables anywhere on your project
 
-
-Defined TextStyle types:
-- xS, S, M, L, xL, mega
+Pre-defined TextStyle types:
+- xS, S, M, L, xL, mega, giga
 
 Appearance contains these variables:
 - Background Color
@@ -57,11 +55,11 @@ Appearance contains these variables:
 - Dialog Button Color
 - Dialog Button Text Color
 
-Defined Settings
+Pre-defined Settings
 
 - Languages
 - Device Type(Desktop-Mobile)
-- Definable function which is working after changing internet connection status
+- Internet connection status
 
 
 ## Getting started
@@ -76,7 +74,7 @@ Then run `flutter packages get`
 
 ## Example Project
 
-There is a detailed example project in the `example` folder. You can directly run and play on it. There are code snippets from example project below.
+There is a detailed example project in the `example` folder. You can directly run and start working on it. There are code snippets from example project below.
 
 ## Basic Setup
 Run SmartApp.setup() in main function. 
@@ -87,7 +85,7 @@ void main() {
       pages: appPages, languages: languages, appearances: appearances);
 }
 ```
-Set listener for AppSettings in every stateful widget. Because when you change some features, it needs setstate if you want to show changes
+Set listener for AppSettings in every stateful widget. Set listener for AppSettings in every stateful widget. To be able to display the changes on your page setstate function must be run
 
 ```dart
   @override
@@ -97,9 +95,9 @@ Set listener for AppSettings in every stateful widget. Because when you change s
   }
 ```
 
-Set application sizes in your page control panel(the dynamic place where you view your pages)
-Helper: "example/app_design/page_control_panel.dart" here you can see how we did it
-Note: We suggest you to set staticSize as true on Desktop and opposite on Mobile
+Set application sizes on your page control panel(the dynamic place where you view your pages)
+Helper: "example/app_design/page_control_panel.dart" here you can see how it could be done
+Note: Setting staticSize as true on Desktop and false onMobile is suggested
 
 ```dart
   //Turn false if you want dynamic textstyle fonts or icon size
@@ -114,7 +112,7 @@ Note: We suggest you to set staticSize as true on Desktop and opposite on Mobile
     );
   }
 ```
-Thats it! You can fetch your defined fonts or settings from everywhere!
+Thats it! You can fetch your defined fonts or settings anywhere on your project!
 
 ## PageState(Page Management)
 - Define your pages
@@ -158,8 +156,8 @@ void main() async {
 }
 ```
 
-- SmartPage() is your dynamic page widget.Use this widget in the dynamic place where you want to display your pages.Then simply you can use like below the example
-Helper: "example/app_design/page_control_panel.dart" here you can see how we did it
+- SmartPage() is your dynamic page widget. Use this widget in the dynamic place where you want to display your pages. Then simply you can use it like the example below
+Helper: "example/app_design/page_control_panel.dart" here you can see how we it could be done.
 
 ```dart
   Scaffold(
@@ -168,8 +166,8 @@ Helper: "example/app_design/page_control_panel.dart" here you can see how we did
     )
 ```
 
-in cases where user can login
-Login page mostly doesn't have appbar or menu. Thats why below example designed like that
+when there isn't a present have a signed in user, the current would be login page. In that case, widgets such as menus, appbar cannot be displayed. It could be difficult to set the dynamic part of the application in those situations. An example was given below to overcome this situation.
+
 ```dart
     return Scaffold(
       backgroundColor: SmartApp.appColors.backGroundColor,
@@ -191,7 +189,7 @@ Login page mostly doesn't have appbar or menu. Thats why below example designed 
 ```
 
 ### Change Page
-You have two ways to change the current page
+You have two ways to switch between pages
 
 -via BuildContext:
 ```dart
@@ -206,8 +204,8 @@ You have two ways to change the current page
 ## AppFonts part
 
 ### Set Application Sizes
-Set application sizes in your page control panel(the dynamic place where you view your pages)
-Note: We suggest you to set staticSize as true on Desktop and opposite on Mobile
+Set application sizes on your page control panel(the dynamic place where you view your pages)
+Note: Setting staticSize as true on Desktop and false onMobile is suggested
 
 ```dart
   //Turn false if you want dynamic textstyle fonts or icon size
@@ -220,8 +218,7 @@ Note: We suggest you to set staticSize as true on Desktop and opposite on Mobile
   }
 ```
 
-TextStyle parameters = color, isBold, fontWeight, isStatic
-But you dont need to define its parameters
+TextStyle parameters = color, isBold, fontWeight, isStatic. These parameters have their own default values so you dont have to define them
 ```dart
     Text(
       "Hello",
@@ -231,7 +228,7 @@ But you dont need to define its parameters
       fontWeight: FontWeight.normal),
         ),
 ```
-Specifically, you may need static/dynamic textstyle
+Static and dynamic textstyle could be chosen in specific cases of your project
 - Fetching TextStyle
 ```dart
     Text(
@@ -239,7 +236,9 @@ Specifically, you may need static/dynamic textstyle
        style: SmartApp.appFonts.L(isStatic: true),
     )
 ```
-- If you are working with responsive textstyle, these textstyle sizes are calculated by multiplying the total app size(app width + app height) by some ratio
+- If you are working with dynamic textstyle, these textstyle sizes are determined by the multiplication of  pre-determined rates and total size of application
+
+```
   Ratios : {
     "xS": 0.009,
     "S": 0.012,
@@ -249,11 +248,13 @@ Specifically, you may need static/dynamic textstyle
     "mega": 0.030,
     "giga": 0.040
   }
-  You can change these ratios with:
+```
+These ratios could be changed with ratio parameter:
 ```dart
    SmartApp.appFonts.changeStaticSizeRatio(name:"L", ratio:0.012);
 ```
-- If you are working with static textstyle, static textstyle sizes like:
+- Default value of each static size are given below:
+```
   Sizes : {
     "xS": 8,
     "S": 12,
@@ -262,7 +263,10 @@ Specifically, you may need static/dynamic textstyle
     "xL": 26,
     "mega": 40
   }
-  You can change these sizes with:
+```
+
+  These default values could be changed with code given below:
+
 ```dart
    SmartApp.appFonts.changeStaticSize(name:"L", size:20);
 ```
@@ -275,7 +279,7 @@ Specifically, you may need static/dynamic textstyle
 ```
 ## AppColors
 
-AppColors contains the color types of your application. You need to set your application's appearances to use that. 
+AppColors contains the color types of your application. Application's appearances have to be defined to be able to use that. 
 
 ### Set Appearances
 
@@ -288,7 +292,7 @@ AppColors contains the color types of your application. You need to set your app
   ], initAppearance: Appearance.dark());
 ```
 
-- And put that inside setup function or set your app's appearances through setAppAppearances function inside SmartApp
+-And put that inside setup function or set your app's appearances through setAppAppearances function inside SmartApp
 
 ```dart
   SmartApp.setup(appearances: appearances);
@@ -331,44 +335,46 @@ AppColors contains the color types of your application. You need to set your app
 - dialogBtnTextColor
 - dialogIconColor
 
-Application designs mostly need two common color for background fill. For example when you got left menu, second background color is waiting to fill it. 
+Applications usually requires at least two background colors to fill the entire page. Some apps might have left menus and in such cases it would be wise to use secondary background color. 
 
-- Imagine you got left menu and design like that:
+-An example below was given for app with left menus :
 
 ```dart
 Row(
-      children: [
-        Expanded(
-          child: Container(
-            width: double.infinity,
-            height: double.infinity,
-            color: SmartApp.appColors.secondaryBackgroundColor,
-          ),
-        ),
-        Expanded(
-          flex: 5,
-          child: Container(
-            width: double.infinity,
-            height: double.infinity,
-            color: SmartApp.appColors.backgroundColor,
-          ),
-        )
-      ],
+  children: [
+    Expanded(
+      child: Container(
+        width: 400,
+        height: double.infinity,
+        color: SmartApp.appColors.secondaryBackgroundColor,
+        child: LeftMenu(),
+      ),
+    ),
+    Expanded(
+      child: Container(
+        width: double.infinity,
+        height: double.infinity,
+        color: SmartApp.appColors.backgroundColor,
+        child: SmartPage(),
+      ),
     )
+  ],
+)
 ```
-- Then we also need two text color too. These names are textColor, secondaryTextColor
+-This would mean two text colors are required to design the app. Those variables are called textColor and secondaryTextColor
 
 ## AppSettings
 
-AppSettings is the control mechanism of your app. When something updated in AppColors and AppFonts, this also trigger to AppSettings. Which means you dont need to listen the other statements.
+AppSettings is the control mechanism of your app. When something gets updated in AppColors and AppFonts, this also triggers AppSettings. Which means AppColors and AppFonts dont need to be listened
 
 AppSettings contains:
 - Languages
 - Device Type(Desktop-Mobile)
-- Definable function which is working after changing internet connection status
+- Internet connection status
+- Run your own function on change of internet connection status
 
 ### Languages
--You need to set languages of your app to use "App Language" option and put it inside setup function
+Languages of the app need to be defined to be able to use "App Language" option.
 
 ```dart
   AppLanguages languages =
@@ -377,24 +383,24 @@ AppSettings contains:
 ```
 
 ### Device Type(Desktop-Mobile)
--Make sure you have called AppFonts.init() function before using this feature
--You'll be able to reach these bool variables:
+-AppFonts.init() function have to be called before using this feature
+-This will give access to boolean variables below :
 - isMobile:
-You can check if the user is connected by phone
+The platform can be checked if it's phone
 - isDesktop:
-You can check if the user is connected with the desktop
+The platform can be checked if it's desktop
 - isWeb:
-You can check if the user is connected via the web
+The platform can be checked if it's web
 - landScape:
-You can check if the user is holding the phone sideways
+Landscape mode can be checked with
 - mobileMode:
-You can check if the user has downsized the desktop app to the size of the mobile app
+Size of desktop app can be checked if it's downsized to mobileMode
 - largeMode:
-You can check if the user is using the desktop application in high sizes
+Size of desktop app can be checked if it's large mode
 - midMode:
-You can check if the user is using the desktop application in sizes that between Mobile Mode and Large Mode
+Size of desktop app can be checked if it's between large and mobile mode
 - anyMobile:
-If you are developing crossplatform application and want check if it is in mobile sizes, you can use this
+if the app is multiplatform the size of app can be checked if it's in mobile sizes (this will return true either the platform is mobile or the sizes are in mobile sizes)
 
 ```dart
   bool isMobile=SmartApp.appSettings.isMobile;
@@ -409,7 +415,7 @@ If you are developing crossplatform application and want check if it is in mobil
 
 ### Internet Connection Checker
 
--Set your function which is working after changing internet connection status:
+- Run your own function on change of internet connection status:
 ```dart
   SmartApp.appSettings.onConnectionChange=(status) {
     print("Connection status has changed");
@@ -423,19 +429,32 @@ If you are developing crossplatform application and want check if it is in mobil
 
 ## SmartText
 
-When you are developing multi language application it can be hard to manage it. But with this way its so simple.
-- Make sure to set the languages of your app
-- Use SmartText for variable of type String, SmartList for variable of type List<String>
+Managing the multi language development can be done with ease with the utilization of smartText widget.
+- Make sure to define the languages of your app
+- SmartText can be used to create single string translations
+- SmartList can be used to create a list of translations for multiple strings
 - 
-### Use SmartText inside your Text() widget
-
+### SmartText can be used inside text widget
 ```dart
 Text(
   SmartText(["Page", "Sayfa"]).text,
   style: appFonts.giga(),
 )
 ```
-### Design your word class that includes your common words like this way:
+### SmartList
+
+```dart
+Text(
+  SmartText(["Page", "Sayfa"]).text,
+  style: appFonts.giga(),
+)
+for (var language in SmartList([
+  ["Page1", "Page2", "Page3"],
+  ["Seite1", "Seite2", "Seite3"]
+]).texts)
+  Text(language)
+```
+-A class that includes common words of an application can be designed the way it was done in the example given below
 
 ```dart
 class AppTexts {
@@ -464,7 +483,7 @@ class AppTexts {
 }
 ```
 
-And use it:
+-And it can be used as presented below:
 
 ```dart
 Text(
@@ -495,6 +514,8 @@ Text(
         },
         name: "changeLeftMenuStatus");
 ```
+
+<img src="https://raw.githubusercontent.com/worldwidee/files/main/settings.gif"> 
 
 ## Widgets, Functions, Extensions
 
@@ -535,7 +556,6 @@ Text(
 | VideoPlayerMobile |                   |                              |
 | VideoPlayerDesktop|                   |                              |
 
-## Contributions
-* If you **found a bug**, open an issue.
-* If you **have a feature request**, open an issue.
+## To Contribute
+* If you **found a bug** or **have a feature request**, open an issue.
 * If you **want to contribute**, submit a pull request.

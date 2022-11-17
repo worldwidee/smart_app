@@ -19,9 +19,9 @@ class AppTexts {
   static List<String> get languages => SmartList([
         ["English", "Turkish"],
         ["İngilizce", "Türkçe"]
-      ]).text;
+      ]).texts;
   static List<String> get menus => SmartList([
         ["Page 1", "Page 2", "Settings", "Signout"],
         ["Sayfa 1", "Sayfa 2", "Ayarlar", "Çıkış"]
-      ]).text;
+      ]).texts;
 }
