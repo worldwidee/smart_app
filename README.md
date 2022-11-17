@@ -108,7 +108,10 @@ Note: We suggest you to set staticSize as true on Desktop and opposite on Mobile
   Widget build(BuildContext context) {
     SmartApp.appFonts.init(context,staticSize: setSizesAsStatic);
     
-  return Scaffold();
+  return Scaffold(
+      backgroundColor: SmartApp.appColors.backGroundColor,
+      body: SmartPage(),
+    );
   }
 ```
 Thats it! You can fetch your defined fonts or settings from everywhere!
