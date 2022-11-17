@@ -6,14 +6,14 @@
 </p>
 
 Easy and simple way to design your application.<br/>
-Creating the application skeleton could be tough. You can use this skeleton we prepared for you, after you complete the simple steps below. Work on a single project to create your multi-platform app instead of separating your project for any specific platform. We have also prepared a lot of widgets to make your job easier.
+Creating the application skeleton could be tough. You can use this skeleton we prepared for you, after you complete the simple steps below. Work on a single project to create your multi-platform app instead of separating your project for any specific platform. We have also prepared a lot of widgets to make your job easier.<br/>
 -Note: The application which was located inside example folder is ready to utilize. Just do your own fine tuning and go ahead start building your own, project with given features below.
 
 ## Features
 
-Page management is ready to use.
-Writing textstyle  again and again could become a boring task, you will have an access to your own textstyle.  
-You will be able to access these features easily from anywhere in the application.  
+Page management is ready to use.<br/>
+Writing textstyle  again and again could become a boring task, you will have an access to your own textstyle.  <br/>
+You will be able to access these features easily from anywhere in the application.<br/>  
 - Page management
 - Responsive textstyle(for mobile)
 - Manage appearances of your application
@@ -95,9 +95,9 @@ Set listener for AppSettings in every stateful widget. Set listener for AppSetti
   }
 ```
 
-Set application sizes on your page control panel(the dynamic place where you view your pages)
--Helper: "example/app_design/page_control_panel.dart" here you can see how it could be done
--Note: Setting staticSize as true on Desktop and false onMobile is suggested
+Set application sizes on your page control panel(the dynamic place where you view your pages)<br/>
+-Helper: "example/app_design/page_control_panel.dart" here you can see how it could be done<br/>
+-Note: Setting staticSize as true on Desktop and false onMobile is suggested<br/>
 
 ```dart
   //Turn false if you want dynamic textstyle fonts or icon size
@@ -156,7 +156,7 @@ void main() async {
 }
 ```
 
-- SmartPage() is your dynamic page widget. Use this widget in the dynamic place where you want to display your pages. Then simply you can use it like the example below
+- SmartPage() is your dynamic page widget. Use this widget in the dynamic place where you want to display your pages. Then simply you can use it like the example below<br/>
 -Helper: "example/app_design/page_control_panel.dart" here you can see how we it could be done.
 
 ```dart
@@ -204,7 +204,7 @@ You have two ways to switch between pages
 ## AppFonts part
 
 ### Set Application Sizes
-Set application sizes on your page control panel(the dynamic place where you view your pages)
+Set application sizes on your page control panel(the dynamic place where you view your pages)<br/>
 -Note: Setting staticSize as true on Desktop and false onMobile is suggested
 
 ```dart
@@ -228,7 +228,7 @@ TextStyle parameters = color, isBold, fontWeight, isStatic. These parameters hav
       fontWeight: FontWeight.normal),
         ),
 ```
-Static and dynamic textstyle could be chosen in specific cases of your project
+Static and dynamic textstyle could be chosen in specific cases of your project<br/>
 - Fetching TextStyle
 ```dart
     Text(
@@ -335,7 +335,7 @@ AppColors contains the color types of your application. Application's appearance
 - dialogBtnTextColor
 - dialogIconColor
 
-Applications usually requires at least two background colors to fill the entire page. Some apps might have left menus and in such cases it would be wise to use secondary background color. 
+Applications usually requires at least two background colors to fill the entire page. Some apps might have left menus and in such cases it would be wise to use secondary background color. <br/>
 
 -An example below was given for app with left menus :
 
@@ -383,8 +383,8 @@ Languages of the app need to be defined to be able to use "App Language" option.
 ```
 
 ### Device Type(Desktop-Mobile)
--AppFonts.init() function have to be called before using this feature
--This will give access to boolean variables below :
+-AppFonts.init() function have to be called before using this feature<br/>
+-This will give access to boolean variables below :<br/>
 - isMobile:
 The platform can be checked if it's phone
 - isDesktop:
