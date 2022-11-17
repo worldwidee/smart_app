@@ -34,7 +34,7 @@ export 'widgets/radio_button_list.dart';
 export 'widgets/region_bar.dart';
 export 'widgets/expanded_text.dart';
 export 'widgets/expanded_text_button.dart';
-export 'variables.dart';
+export 'variables/time_variables.dart';
 export 'widgets/profile_avatar.dart';
 export 'widgets/image_avatar.dart';
 export 'extensions/page_state.dart';

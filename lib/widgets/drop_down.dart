@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smart_app/smart_app.dart';
-import 'package:smart_app/widgets/onHover.dart';
+import 'package:smart_app/widgets/on_hover.dart';
 
 class DropDown extends StatefulWidget {
   List<DropDownItem> itemsData;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:smart_app/variables.dart';
+import 'package:smart_app/variables/time_variables.dart';
 
 class FileIcon extends StatelessWidget {
   String extension;

@@ -13,3 +13,7 @@
 - Description added for page management
 - There were mini changes in the description
 
+
+## 0.1.0
+
+- Upgrading to 0.1.0

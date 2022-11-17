@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smart_app/smart_app.dart';
 
-import 'onHover.dart';
+import 'on_hover.dart';
 
 class ProfileAvatar extends StatelessWidget {
   String? url;

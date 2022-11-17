@@ -2,7 +2,7 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:smart_app/smart_app.dart';
-import 'videoPlayerDesktop.dart';
+import 'video_player_desktop.dart';
 import 'video_player_mobile.dart';
 
 class SmartPlayer extends StatelessWidget {

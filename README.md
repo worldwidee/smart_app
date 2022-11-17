@@ -7,7 +7,7 @@
 
 Easy and simple way to design your application.<br/>
 Creating the application skeleton could be tough. You can use this skeleton we prepared for you, after you complete the simple steps below. Work on a single project to create your multi-platform app instead of separating your project for any specific platform. We have also prepared a lot of widgets to make your job easier.<br/>
--Note: The application which was located inside example folder is ready to utilize. Just do your own fine tuning and go ahead start building your own, project with given features below.
+Note: The application which was located inside example folder is ready to utilize. Just do your own fine tuning and go ahead start building your own, project with given features below.
 
 ## Features
 
@@ -96,8 +96,8 @@ Set listener for AppSettings in every stateful widget. Set listener for AppSetti
 ```
 
 Set application sizes on your page control panel(the dynamic place where you view your pages)<br/>
--Helper: "example/app_design/page_control_panel.dart" here you can see how it could be done<br/>
--Note: Setting staticSize as true on Desktop and false onMobile is suggested<br/>
+Helper: "example/app_design/page_control_panel.dart" here you can see how it could be done<br/>
+Note: Setting staticSize as true on Desktop and false onMobile is suggested<br/>
 
 ```dart
   //Turn false if you want dynamic textstyle fonts or icon size
@@ -157,7 +157,7 @@ void main() async {
 ```
 
 - SmartPage() is your dynamic page widget. Use this widget in the dynamic place where you want to display your pages. Then simply you can use it like the example below<br/>
--Helper: "example/app_design/page_control_panel.dart" here you can see how we it could be done.
+Helper: "example/app_design/page_control_panel.dart" here you can see how we it could be done.
 
 ```dart
   Scaffold(
@@ -205,7 +205,7 @@ You have two ways to switch between pages
 
 ### Set Application Sizes
 Set application sizes on your page control panel(the dynamic place where you view your pages)<br/>
--Note: Setting staticSize as true on Desktop and false onMobile is suggested
+Note: Setting staticSize as true on Desktop and false onMobile is suggested
 
 ```dart
   //Turn false if you want dynamic textstyle fonts or icon size
@@ -432,8 +432,10 @@ if the app is multiplatform the size of app can be checked if it's in mobile siz
 Managing the multi language development can be done with ease with the utilization of smartText widget.
 - Make sure to define the languages of your app
 - SmartText can be used to create single string translations
-- SmartList can be used to create a list of translations for multiple strings
-- 
+- SmartList can be used to create a list of translations for multiple strings <br/>
+
+#### Warning: Parameters of SmartText&SmartList must be in same order with AppLanguages
+
 ### SmartText can be used inside text widget
 ```dart
 Text(
