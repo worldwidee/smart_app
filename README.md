@@ -5,7 +5,7 @@
 <img width=600 src="https://raw.githubusercontent.com/worldwidee/files/main/settings.gif"> 
 </p>
 
-Easy and simple way to design your application.
+Easy and simple way to design your application.<br/>
 Creating the application skeleton could be tough. You can use this skeleton we prepared for you, after you complete the simple steps below. Work on a single project to create your multi-platform app instead of separating your project for any specific platform. We have also prepared a lot of widgets to make your job easier.
 -Note: The application which was located inside example folder is ready to utilize. Just do your own fine tuning and go ahead start building your own, project with given features below.
 
