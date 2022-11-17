@@ -520,7 +520,7 @@ Text(
 
 ## Widgets, Functions, Extensions
 
-<img src="https://raw.githubusercontent.com/worldwidee/files/main/widgets.gif"> 
+<img width=800 src="https://raw.githubusercontent.com/worldwidee/files/main/widgets.gif"> 
 
 
 |      Widgets      |     Functions     |           Extensions         |
