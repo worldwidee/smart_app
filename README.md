@@ -1,8 +1,8 @@
 # smart_app
 
 <p align="center">
-<img width=600 src="https://github.com/worldwidee/files/raw/main/responsive.gif"> 
-<img width=600 src="https://raw.githubusercontent.com/worldwidee/files/main/settings.gif"> 
+<img width=800 src="https://github.com/worldwidee/files/raw/main/responsive.gif"> 
+<img width=800 src="https://raw.githubusercontent.com/worldwidee/files/main/settings.gif"> 
 </p>
 
 Easy and simple way to design your application.<br/>
