@@ -1,6 +1,6 @@
 name: smart_app
 description: Easy and simple way to design your application
-version: 0.0.3
+version: 0.1.0
 homepage: https://github.com/worldwidee/smart_app
 
 environment:
