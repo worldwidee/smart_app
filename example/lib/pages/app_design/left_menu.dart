@@ -41,7 +41,7 @@ class LeftMenu extends StatelessWidget {
                   child: TextButton(
                     onPressed: () {
                       String route = pageRoutes[i];
-                      SmartAppPanel.pageState.go(name: route);
+                      SmartApp.pageState.go(name: route);
                     },
                     child: Row(
                       children: [

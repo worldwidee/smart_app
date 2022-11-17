@@ -57,15 +57,15 @@ Then run `flutter packages get`
 There is a detailed example project in the `example` folder. You can directly run and play on it. There are code snippets from example project below.
 
 ## Basic Setup
-Start SmartAppPanel() in main function(without page management and language management). 
+Start SmartApp() in main function(without page management and language management). 
 
 ```dart
 late AppColors appColors;
 late AppFonts appFonts;
 late AppSettings appSettings;
-late SmartAppPanel panel;
+late SmartApp panel;
 void main() {
-  panel = SmartAppPanel();
+  panel = SmartApp();
   panel.start();
   appFonts = panel.appFonts;
   appColors = panel.appColors;
@@ -133,7 +133,7 @@ Thats it! You can fetch your defined fonts or settings
 ## Page Management(PageState part)
 - Define your PageState class as global
 ```dart
-   late SmartAppPanel panel;
+   late SmartApp panel;
 ```
 - Define your pages as Map<String, Widget>
 
@@ -153,10 +153,10 @@ Thats it! You can fetch your defined fonts or settings
   initPages.initPage = "page1";
 ```
 
-- Enter this InitPages variable in SmartAppPanel().start function and set your PageState global variable
+- Enter this InitPages variable in SmartApp().start function and set your PageState global variable
 
 ```dart
-  panel = SmartAppPanel();
+  panel = SmartApp();
   panel.start(
       darkMode: true, initPages: initPages);
   pageState = panel.pageState;
@@ -176,9 +176,9 @@ late AppFonts appFonts;
 late AppSettings appSettings;
 late AppTexts appTexts;
 late PageState pageState;
-late SmartAppPanel panel;
+late SmartApp panel;
 void main() {
-  panel = SmartAppPanel();
+  panel = SmartApp();
   Map<String, Widget> pages = {
     "page1": const Page1(),
     "page2": const Page2(),
@@ -329,7 +329,7 @@ Row(
 
 AppSettings is the control mechanism of everything.
 
--You can set init app language, dark mode, function which is working after changing internet status while starting SmartAppPanel() or with defined functions.
+-You can set init app language, dark mode, function which is working after changing internet status while starting SmartApp() or with defined functions.
 ```dart
    appSettings.changeLanguage="English";
    appSettings.changeDarkMode=true;
@@ -361,16 +361,16 @@ settings|=|Settings|,|Ayarlar|,|Einstellungen
 signout|=|Sign Out|,|Oturumu Kapat|,|Abmelden
 ```
 
-- After design your app texts file you are ready to set your words. You can set texts with defined function or while starting SmartAppPanel()
+- After design your app texts file you are ready to set your words. You can set texts with defined function or while starting SmartApp()
 
 ```dart
 late AppColors appColors;
 late AppFonts appFonts;
 late AppSettings appSettings;
 late AppTexts appTexts;
-late SmartAppPanel panel;
+late SmartApp panel;
 void main() {
-  panel = SmartAppPanel();
+  panel = SmartApp();
   panel.start(
       darkMode: true, textPath: "assets/texts.txt");
   appFonts = panel.appFonts;

@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:smart_app/smart_app.dart';
-import '/pages/login_page.dart';
-import '/pages/pageControlPanel/left_menu.dart';
-
 import '../../main.dart';
 import 'appBar.dart';
 import 'drawer.dart';
+import 'left_menu.dart';
 
 class PageControlPanel extends StatefulWidget {
   const PageControlPanel({Key? key}) : super(key: key);

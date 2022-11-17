@@ -17,7 +17,7 @@ class Page1 extends StatefulWidget {
 class _Page1State extends State<Page1> {
   @override
   void initState() {
-    SmartAppPanel.appSettings.listenState(this);
+    SmartApp.appSettings.listenState(this);
     super.initState();
   }
 

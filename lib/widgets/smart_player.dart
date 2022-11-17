@@ -13,7 +13,7 @@ class SmartPlayer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SmartAppPanel.appSettings.isDesktop
+    return SmartApp.appSettings.isDesktop
         ? VideoPlayerDesktop(path: path, width: width, height: height)
         : VideoPlayerMobile(path: path, width: width, height: height);
   }

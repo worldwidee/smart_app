@@ -79,11 +79,11 @@ Then run `flutter packages get`
 There is a detailed example project in the `example` folder. You can directly run and play on it. There are code snippets from example project below.
 
 ## Basic Setup
-Run SmartAppPanel.setup() in main function. 
+Run SmartApp.setup() in main function. 
 
 ```dart
 void main() {
-  SmartAppPanel.setup(
+  SmartApp.setup(
       pages: appPages, languages: languages, appearances: appearances);
 }
 ```
@@ -92,12 +92,13 @@ Set listener for AppSettings in every stateful widget. Because when you change s
 ```dart
   @override
   void initState() {
-    SmartAppPanel.appSettings.listenState(this);
+    SmartApp.appSettings.listenState(this);
     super.initState();
   }
 ```
 
 Set application sizes in your page control panel(the dynamic place where you view your pages)
+Helper: "example/app_design/page_control_panel.dart" here you can see how we did it
 Note: We suggest you to set staticSize as true on Desktop and opposite on Mobile
 
 ```dart
@@ -105,7 +106,7 @@ Note: We suggest you to set staticSize as true on Desktop and opposite on Mobile
   bool setSizesAsStatic = true;
   @override
   Widget build(BuildContext context) {
-    SmartAppPanel.appFonts.init(context,staticSize: setSizesAsStatic);
+    SmartApp.appFonts.init(context,staticSize: setSizesAsStatic);
     
   return Scaffold();
   }
@@ -126,10 +127,10 @@ Thats it! You can fetch your defined fonts or settings from everywhere!
 - And put that inside setup function or set for PageState
 
 ```dart
-  SmartAppPanel.setup(pages: appPages);
+  SmartApp.setup(pages: appPages);
 ```
 ```dart
-  SmartAppPanel.setAppPages(appPages);
+  SmartApp.setAppPages(appPages);
 ```
 
 - Full view
@@ -148,17 +149,18 @@ void main() async {
     Appearance.dark(),
     Appearance.light(),
   ], initAppearance: Appearance.dark());
-  SmartAppPanel.setup(
+  SmartApp.setup(
       pages: appPages, languages: languages, appearances: appearances);
   runApp(const MyApp());
 }
 ```
 
 - SmartPage() is your dynamic page widget.Use this widget in the dynamic place where you want to display your pages.Then simply you can use like below the example
+Helper: "example/app_design/page_control_panel.dart" here you can see how we did it
 
 ```dart
   Scaffold(
-      backgroundColor: SmartAppPanel.appColors.backGroundColor,
+      backgroundColor: SmartApp.appColors.backGroundColor,
       body: SmartPage(),
     )
 ```
@@ -167,7 +169,7 @@ in cases where user can login
 Login page mostly doesn't have appbar or menu. Thats why below example designed like that
 ```dart
     return Scaffold(
-      backgroundColor: SmartAppPanel.appColors.backGroundColor,
+      backgroundColor: SmartApp.appColors.backGroundColor,
       appBar: signIn ? MyAppbar() : null,
       body: signIn
           ? Row(
@@ -195,7 +197,7 @@ You have two ways to change the current page
 
 -via PageState:
 ```dart
-   SmartAppPanel.pageState.go(name: pageName); //Provide the defined name of the target page
+   SmartApp.pageState.go(name: pageName); //Provide the defined name of the target page
 ```
 
 ## AppFonts part
@@ -209,7 +211,7 @@ Note: We suggest you to set staticSize as true on Desktop and opposite on Mobile
   bool setSizesAsStatic = true;
   @override
   Widget build(BuildContext context) {
-    SmartAppPanel.appFonts.init(context,staticSize: setSizesAsStatic);
+    SmartApp.appFonts.init(context,staticSize: setSizesAsStatic);
     
   return Scaffold();
   }
@@ -220,9 +222,9 @@ But you dont need to define its parameters
 ```dart
     Text(
       "Hello",
-      style: SmartAppPanel.appFonts.L(
+      style: SmartApp.appFonts.L(
       isBold: true,
-      color: SmartAppPanel.appColors.textColor,
+      color: SmartApp.appColors.textColor,
       fontWeight: FontWeight.normal),
         ),
 ```
@@ -231,7 +233,7 @@ Specifically, you may need static/dynamic textstyle
 ```dart
     Text(
        "Hello",
-       style: SmartAppPanel.appFonts.L(isStatic: true),
+       style: SmartApp.appFonts.L(isStatic: true),
     )
 ```
 - If you are working with responsive textstyle, these textstyle sizes are calculated by multiplying the total app size(app width + app height) by some ratio
@@ -246,7 +248,7 @@ Specifically, you may need static/dynamic textstyle
   }
   You can change these ratios with:
 ```dart
-   SmartAppPanel.appFonts.changeStaticSizeRatio(name:"L", ratio:0.012);
+   SmartApp.appFonts.changeStaticSizeRatio(name:"L", ratio:0.012);
 ```
 - If you are working with static textstyle, static textstyle sizes like:
   Sizes : {
@@ -259,14 +261,14 @@ Specifically, you may need static/dynamic textstyle
   }
   You can change these sizes with:
 ```dart
-   SmartAppPanel.appFonts.changeStaticSize(name:"L", size:20);
+   SmartApp.appFonts.changeStaticSize(name:"L", size:20);
 ```
 
 - Fetching app sizes
 ```dart
-    double app_width=SmartAppPanel.appFonts.appWidth;
-    double app_height=SmartAppPanel.appFonts.appHeight;
-    double app_totalSize=SmartAppPanel.appFonts.totalSize;
+    double app_width=SmartApp.appFonts.appWidth;
+    double app_height=SmartApp.appFonts.appHeight;
+    double app_totalSize=SmartApp.appFonts.totalSize;
 ```
 ## AppColors
 
@@ -283,13 +285,13 @@ AppColors contains the color types of your application. You need to set your app
   ], initAppearance: Appearance.dark());
 ```
 
-- And put that inside setup function or set your app's appearances through setAppAppearances function inside SmartAppPanel
+- And put that inside setup function or set your app's appearances through setAppAppearances function inside SmartApp
 
 ```dart
-  SmartAppPanel.setup(appearances: appearances);
+  SmartApp.setup(appearances: appearances);
 ```
 ```dart
-  SmartAppPanel.setAppAppearances(appearances);
+  SmartApp.setAppAppearances(appearances);
 ```
 
 
@@ -337,7 +339,7 @@ Row(
           child: Container(
             width: double.infinity,
             height: double.infinity,
-            color: SmartAppPanel.appColors.secondaryBackgroundColor,
+            color: SmartApp.appColors.secondaryBackgroundColor,
           ),
         ),
         Expanded(
@@ -345,7 +347,7 @@ Row(
           child: Container(
             width: double.infinity,
             height: double.infinity,
-            color: SmartAppPanel.appColors.backgroundColor,
+            color: SmartApp.appColors.backgroundColor,
           ),
         )
       ],
@@ -368,7 +370,7 @@ AppSettings contains:
 ```dart
   AppLanguages languages =
       AppLanguages(languages: ["English,Turkish"], initLanguge: "English");
-  SmartAppPanel.setup(languages: languages);
+  SmartApp.setup(languages: languages);
 ```
 
 ### Device Type(Desktop-Mobile)
@@ -392,28 +394,28 @@ You can check if the user is using the desktop application in sizes that between
 If you are developing crossplatform application and want check if it is in mobile sizes, you can use this
 
 ```dart
-  bool isMobile=SmartAppPanel.appSettings.isMobile;
-  bool isDesktop=SmartAppPanel.appSettings.isDesktop;
-  bool isDesktop=SmartAppPanel.appSettings.isWeb;
-  bool landScape=SmartAppPanel.appSettings.landScape;
-  bool mobileMode=SmartAppPanel.appSettings.mobileMode;
-  bool largeMode=SmartAppPanel.appSettings.largeMode;
-  bool midMode=SmartAppPanel.appSettings.midMode;
-  bool anyMobile=SmartAppPanel.appSettings.anyMobile;
+  bool isMobile=SmartApp.appSettings.isMobile;
+  bool isDesktop=SmartApp.appSettings.isDesktop;
+  bool isDesktop=SmartApp.appSettings.isWeb;
+  bool landScape=SmartApp.appSettings.landScape;
+  bool mobileMode=SmartApp.appSettings.mobileMode;
+  bool largeMode=SmartApp.appSettings.largeMode;
+  bool midMode=SmartApp.appSettings.midMode;
+  bool anyMobile=SmartApp.appSettings.anyMobile;
 ```
 
 ### Internet Connection Checker
 
 -Set your function which is working after changing internet connection status:
 ```dart
-  SmartAppPanel.appSettings.onConnectionChange=(status) {
+  SmartApp.appSettings.onConnectionChange=(status) {
     print("Connection status has changed");
   };
 ```
 
 -Get connection status:
 ```dart
-  bool connected=SmartAppPanel.appSettings.connected!;
+  bool connected=SmartApp.appSettings.connected!;
 ```
 
 ## SmartText
@@ -474,19 +476,19 @@ Text(
 ```dart
    double size=20;
    String name="middle";
-   SmartAppPanel.appFonts.addSpecificSize(name:name,size:size);
+   SmartApp.appFonts.addSpecificSize(name:name,size:size);
    // Then get your specific textstyle and size
-   double size=SmartAppPanel.appFonts.specificSize("middle");
-   TextStyle specific=SmartAppPanel.appFonts.specific(specificType:"middle");
+   double size=SmartApp.appFonts.specificSize("middle");
+   TextStyle specific=SmartApp.appFonts.specific(specificType:"middle");
 ```
 - Custom AppSettings
 ```dart
     bool variable = false;
-    SmartAppPanel.appSettings.addSpecificVariable(variable: variable, name: "leftMenuOpened");
-    SmartAppPanel.appSettings.addSpecificSetting(
+    SmartApp.appSettings.addSpecificVariable(variable: variable, name: "leftMenuOpened");
+    SmartApp.appSettings.addSpecificSetting(
         function: () {
-          SmartAppPanel.appSettings.specificVariables["leftMenuOpened"] =
-              !SmartAppPanel.appSettings.specificVariables["leftMenuOpened"];
+          SmartApp.appSettings.specificVariables["leftMenuOpened"] =
+              !SmartApp.appSettings.specificVariables["leftMenuOpened"];
         },
         name: "changeLeftMenuStatus");
 ```

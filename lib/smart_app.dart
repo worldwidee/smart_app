@@ -40,7 +40,7 @@ export 'widgets/image_avatar.dart';
 export 'extensions/page_state.dart';
 export 'extensions/string.dart';
 
-class SmartAppPanel {
+class SmartApp {
   static Future<void> setup({
     AppAppearances? appearances,
     AppLanguages? languages,

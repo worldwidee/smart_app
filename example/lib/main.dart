@@ -6,14 +6,14 @@ import '/pages/page1.dart';
 import '/pages/page2.dart';
 import '/pages/settings.dart';
 
-import 'pages/pageControlPanel/pageControlPanel.dart';
+import 'pages/app_design/page_control_panel.dart';
 import 'texts/app_text.dart';
 
 late AppColors appColors;
 late AppFonts appFonts;
 late AppSettings appSettings;
 late PageState pageState;
-late SmartAppPanel panel;
+late SmartApp panel;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   AppPages appPages = AppPages(pages: {
@@ -29,12 +29,12 @@ void main() async {
     Appearance.dark(),
     Appearance.light(),
   ], initAppearance: Appearance.dark());
-  SmartAppPanel.setup(
+  SmartApp.setup(
       pages: appPages, languages: languages, appearances: appearances);
-  appFonts = SmartAppPanel.appFonts;
-  appColors = SmartAppPanel.appColors;
-  appSettings = SmartAppPanel.appSettings;
-  pageState = SmartAppPanel.pageState;
+  appFonts = SmartApp.appFonts;
+  appColors = SmartApp.appColors;
+  appSettings = SmartApp.appSettings;
+  pageState = SmartApp.pageState;
   runApp(const MyApp());
 }
 
